@@ -92,8 +92,13 @@ WSGI_APPLICATION = 'invProject.wsgi.application'
 #         'PORT': os.getenv('DATABASE_PORT'),
 #     }
 # }
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set. Please add it to your environment variables.")
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=True)
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600, ssl_require=True)
 }
 # DATABASES = {
 #     'default': {
